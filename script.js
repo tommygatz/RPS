@@ -16,7 +16,6 @@ function computerPlay(){
             a = "scissors";
             break;
         default:
-            console.log("Error: invalid choice");
             break;
     }
     // console.log("Computer chose: ");
@@ -26,7 +25,7 @@ function computerPlay(){
 
 
 
-// Create function to take that input and compare it against the computerPlay function
+// Function to ask for input from player and convert to lowercase or "invalid" for later use.
 
 function playerSelect() {
     let b = window.prompt("Make your choice: Rock, Paper, or Scissors")
@@ -49,24 +48,24 @@ function playerSelect() {
 // Function to play a round (calls both playerSelect() and computerPlay())
 
 function playRound() {
-    let computerSelection = computerPlay();
-    let playerSelection = playerSelect();
-    // var player = 0;
-    // var comp = 0;
+    const computerSelection = computerPlay();
+    const playerSelection = playerSelect();
+    var player = 0;
+    var comp = 0;
     let decision = "No decision has been made.";
     if (playerSelection !== "invalid"){
         switch(playerSelection) { 
             case "rock":
                 if (computerSelection === playerSelection){
-                    decision = "It's a tie! You both chose " + playerSelection;
+                    decision = "It's a tie! You both chose " + playerSelection + ".";
                 }
                 else if (computerSelection === "paper") {
-                    decision = "You lose! " + computerSelection + " beats " + playerSelection;
-                    // comp++;
+                    decision = "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    comp++;
                 }
                 else if (computerSelection === "scissors") {
-                    decision = "You win! " + playerSelection + " beats " + computerSelection;
-                    // player++;
+                    decision = "You win! " + playerSelection + " beats " + computerSelection + ".";
+                    player++;
                 }
                 else {
                     console.log("There was an issue...");
@@ -74,15 +73,15 @@ function playRound() {
                 break;
             case "paper":
                 if (computerSelection === playerSelection){
-                    decision = "It's a tie! You both chose " + playerSelection;
+                    decision = "It's a tie! You both chose " + playerSelection + ".";
                 }
                 else if (computerSelection === "scissors") {
-                    decision = "You lose! " + computerSelection + " beats " + playerSelection;
-                    // comp++;
+                    decision = "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    comp++;
                 }
                 else if (computerSelection === "rock") {
-                    decision = "You win! " + playerSelection + " beats " + computerSelection;
-                    // player++;
+                    decision = "You win! " + playerSelection + " beats " + computerSelection + ".";
+                    player++;
                 }
                 else {
                     console.log("There was an issue...");
@@ -90,15 +89,15 @@ function playRound() {
                 break;
             case "scissors":
                 if (computerSelection === playerSelection){
-                    decision = "It's a tie! You both chose " + playerSelection;
+                    decision = "It's a tie! You both chose " + playerSelection + ".";
                 }
                 else if (computerSelection === "rock") {
-                    decision = "You lose! " + computerSelection + " beats " + playerSelection;
-                    // comp++;
+                    decision = "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    comp++;
                 }
                 else if (computerSelection === "paper") {
-                    decision = "You win! " + playerSelection + " beats " + computerSelection;
-                    // player++;
+                    decision = "You win! " + playerSelection + " beats " + computerSelection + ".";
+                    player++;
                 }
                 else {
                     console.log("There was an issue...");
@@ -112,24 +111,31 @@ function playRound() {
     else {
         console.log("Please choose a valid input.");
     }
-    return decision;
+    let results = [decision, player, comp]
+    return results;
 }
 
+// Run the game over a set number of times
+
 function game() {
-    // var playerWins = 0;
-    // var computerWins = 0;
+    var playerWins = 0;
+    var computerWins = 0;
     for (let i = 0; i < 5; i++) {
         var round = playRound();
-        // playerWins = playerWins + player;
-        // computerWins = computerWins + comp;
-        console.log("Round " + (i + 1) + " decision: " + round);
-    // }
-    // if (playerWins > computerWins) {
-    //     let winner = "You are ";
-    // }
-    // else {
-    //     let winner = "The computer is ";
+        playerWins = playerWins + round[1];
+        computerWins = computerWins + round[2];
+        console.log("player: " + playerWins + ", computer: " + computerWins);
+        console.log("Round " + (i + 1) + " decision: " + round[0]);
     }
-    console.log("Game Over! Run game() again to play.");
+    if (playerWins > computerWins) {
+        var winner = "You are the winner of the game! The score was " + playerWins + "-" + computerWins + ".";
+    }
+    else if (playerWins < computerWins) {
+        var winner = "You lost to the computer! The score was " + playerWins + "-" + computerWins + ".";
+    }
+    else {
+        var winner = "The game was a tie!! The score was " + playerWins + "-" + computerWins + ".";
+        }
+    console.log(winner);
     return;
 }
