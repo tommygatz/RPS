@@ -28,30 +28,41 @@ function computerPlay(){
 // Function to ask for input from player and convert to lowercase or "invalid" for later use.
 
 function playerSelect() {
-    let b = window.prompt("Make your choice: Rock, Paper, or Scissors")
+    let playerChoice = window.prompt("Make your choice: Rock, Paper, or Scissors")
 
-    if (b.toLowerCase() == "rock") {
-        b = "rock";
+    if (playerChoice.toLowerCase() == "rock") {
+        playerChoice = "rock";
     } 
-    else if (b.toLowerCase() == "paper") {
-        b = "paper";
+    else if (playerChoice.toLowerCase() == "paper") {
+        playerChoice = "paper";
     }
-    else if (b.toLowerCase() == "scissors") {
-        b = "scissors";
+    else if (playerChoice.toLowerCase() == "scissors") {
+        playerChoice = "scissors";
     }
     else {
-        b = "invalid";
+        playerChoice = "invalid";
     }
-    return b;
+    return playerChoice;
 }
+
+// Adding event listeners to the buttons
+
+const buttons = document.querySelectorAll('button'); // buttons is a node list. It looks and acts much like an array.
+
+buttons.forEach((button) => { // we use the .forEach method to iterate through each button
+  button.addEventListener('click', () => {   // and for each one we add a 'click' listener
+    playRound(button.id);
+  });
+});
 
 // Function to play a round (calls both playerSelect() and computerPlay())
 
-function playRound() {
+var player = 0;
+var comp = 0;
+
+function playRound(choice) {
     const computerSelection = computerPlay();
-    const playerSelection = playerSelect();
-    var player = 0;
-    var comp = 0;
+    const playerSelection = choice;
     let decision = "No decision has been made.";
     if (playerSelection !== "invalid"){
         switch(playerSelection) { 
@@ -112,30 +123,57 @@ function playRound() {
         console.log("Please choose a valid input.");
     }
     let results = [decision, player, comp]
+    // console.log(results);
+
+    const display = document.getElementById('displayResults');
+    display.innerHTML = results[0];
+
+    const score1 = document.getElementById('playerScore');
+    score1.innerHTML = results[1];  
+
+    const score2 = document.getElementById('compScore');
+    score2.innerHTML = results[2];
+
+    const endGame = document.getElementById('gameOver');
+
+    if (results[1] >= 5) {
+        endGame.innerHTML = 'You won the game!';
+        player = 0;
+        comp = 0;
+    }
+    else if (results[2] >= 5) {
+        endGame.innerHTML = 'You lost the game.';
+        player = 0;
+        comp = 0;
+    }
+    else {
+        endGame.innerHTML = '';
+    }
+
     return results;
 }
 
 // Run the game over a set number of times
 
-function game() {
-    var playerWins = 0;
-    var computerWins = 0;
-    for (let i = 0; i < 5; i++) {
-        var round = playRound();
-        playerWins = playerWins + round[1];
-        computerWins = computerWins + round[2];
-        console.log("player: " + playerWins + ", computer: " + computerWins);
-        console.log("Round " + (i + 1) + " decision: " + round[0]);
-    }
-    if (playerWins > computerWins) {
-        var winner = "You are the winner of the game! The score was " + playerWins + "-" + computerWins + ".";
-    }
-    else if (playerWins < computerWins) {
-        var winner = "You lost to the computer! The score was " + playerWins + "-" + computerWins + ".";
-    }
-    else {
-        var winner = "The game was a tie!! The score was " + playerWins + "-" + computerWins + ".";
-        }
-    console.log(winner);
-    return;
-}
+// function game() {
+//     var playerWins = 0;
+//     var computerWins = 0;
+//     for (let i = 0; i < 5; i++) {
+//         var round = playRound();
+//         playerWins = playerWins + round[1];
+//         computerWins = computerWins + round[2];
+//         console.log("player: " + playerWins + ", computer: " + computerWins);
+//         console.log("Round " + (i + 1) + " decision: " + round[0]);
+//     }
+//     if (playerWins > computerWins) {
+//         var winner = "You are the winner of the game! The score was " + playerWins + "-" + computerWins + ".";
+//     }
+//     else if (playerWins < computerWins) {
+//         var winner = "You lost to the computer! The score was " + playerWins + "-" + computerWins + ".";
+//     }
+//     else {
+//         var winner = "The game was a tie!! The score was " + playerWins + "-" + computerWins + ".";
+//         }
+//     console.log(winner);
+//     return;
+// }
