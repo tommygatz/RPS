@@ -47,7 +47,7 @@ function playerSelect() {
 
 // Adding event listeners to the buttons
 
-const buttons = document.querySelectorAll('button'); // buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('img'); // buttons is a node list. It looks and acts much like an array.
 
 buttons.forEach((button) => { // we use the .forEach method to iterate through each button
   button.addEventListener('click', () => {   // and for each one we add a 'click' listener
