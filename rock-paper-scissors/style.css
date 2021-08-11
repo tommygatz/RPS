@@ -16,6 +16,7 @@
     position: relative;
     top: 10%;
     width: 30%;
+    max-width: 100px;
 }
 
 
