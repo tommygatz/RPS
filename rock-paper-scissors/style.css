@@ -11,12 +11,27 @@
     text-align: center;
 }
 
-#rock, #paper, #scissors {
+.btn {
     display: inline-flex;
     position: relative;
     top: 10%;
     width: 30%;
     max-width: 100px;
+    border: none; 
+    border-radius: 50%;
+    box-shadow: 0 3px #999;
+}
+
+.btn:active {
+    display: inline-flex;
+    position: relative;
+    top: 10%;
+    width: 30%;
+    max-width: 100px;
+    border: none; 
+    border-radius: 50%;
+    box-shadow: 0 0px #999;
+    transform: translateY(3px);
 }
 
 
@@ -26,4 +41,10 @@
     position: relative;
     top: 50px;
     text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+#gameOver {
+    font-size: 40px;
+}
+
