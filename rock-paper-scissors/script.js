@@ -2,6 +2,7 @@
 
 
 // Begin with computerPlay function to randomly return Rock, Paper, or Scissors
+
 function computerPlay(){
     const rndInt = Math.floor(Math.random() * 3) + 1;
     let a = "";
